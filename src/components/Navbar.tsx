@@ -25,7 +25,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0">
-            <span className="font-display text-2xl font-bold text-warmGray-800">GB Surveying</span>
+            <span className={`font-display text-2xl font-bold ${isScrolled ? 'text-warmGray-800' : 'text-white'}`}>GB Surveying</span>
           </div>
           
           {/* Desktop Menu */}
@@ -34,7 +34,9 @@ const Navbar = () => {
               <a
                 key={item}
                 href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
-                className="text-warmGray-600 hover:text-warmGray-900 transition-colors duration-200 font-medium"
+                className={`transition-colors duration-200 font-medium ${
+                  isScrolled ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80'
+                }`}
               >
                 {item}
               </a>
@@ -45,7 +47,9 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-md text-warmGray-600 hover:text-warmGray-900 focus:outline-none"
+              className={`p-2 rounded-md transition-colors duration-200 ${
+                isScrolled ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80'
+              } focus:outline-none`}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -63,7 +67,9 @@ const Navbar = () => {
               <a
                 key={item}
                 href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
-                className="block px-3 py-2 text-warmGray-600 hover:text-warmGray-900 transition-colors duration-200 font-medium"
+                className={`block px-3 py-2 transition-colors duration-200 font-medium ${
+                  isScrolled ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80'
+                }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item}
