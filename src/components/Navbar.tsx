@@ -14,6 +14,8 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const menuItems = ['Home', 'Services', 'Survey Definitions', 'About', 'Contact'];
+
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
@@ -28,10 +30,10 @@ const Navbar = () => {
           
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
-            {['Home', 'Services', 'About', 'Projects', 'Contact'].map((item) => (
+            {menuItems.map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
                 className="text-warmGray-600 hover:text-warmGray-900 transition-colors duration-200 font-medium"
               >
                 {item}
@@ -57,10 +59,10 @@ const Navbar = () => {
           } overflow-hidden`}
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
-            {['Home', 'Services', 'About', 'Projects', 'Contact'].map((item) => (
+            {menuItems.map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
                 className="block px-3 py-2 text-warmGray-600 hover:text-warmGray-900 transition-colors duration-200 font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
