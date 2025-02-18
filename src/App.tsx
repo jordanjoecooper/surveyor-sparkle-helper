@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import SurveyDefinitions from "./pages/SurveyDefinitions";
+import Disclaimer from "./pages/Disclaimer";
+import ThirdPartySites from "./pages/ThirdPartySites";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,6 +21,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/survey-definitions" element={<SurveyDefinitions />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/third-party-sites" element={<ThirdPartySites />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

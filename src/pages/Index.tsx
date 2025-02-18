@@ -1,6 +1,6 @@
-
 import { Building, MapPin, Phone, Mail, Clock } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Index = () => {
   return (
@@ -162,6 +162,8 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };
