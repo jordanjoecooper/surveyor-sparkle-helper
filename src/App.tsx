@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import SurveyDefinitions from "./pages/SurveyDefinitions";
 import Disclaimer from "./pages/Disclaimer";
 import ThirdPartySites from "./pages/ThirdPartySites";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/survey-definitions" element={<SurveyDefinitions />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/third-party-sites" element={<ThirdPartySites />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
