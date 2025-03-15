@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  // Check if we're on the home page
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,13 +23,15 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
+        isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : isHomePage ? 'bg-transparent' : 'bg-white shadow-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0">
-            <span className={`font-display text-2xl font-bold ${isScrolled ? 'text-warmGray-800' : 'text-white'}`}>GB Surveying</span>
+            <span className={`font-display text-2xl font-bold ${
+              isScrolled || !isHomePage ? 'text-warmGray-800' : 'text-white'
+            }`}>GB Surveying</span>
           </div>
           
           {/* Desktop Menu */}
@@ -35,7 +41,9 @@ const Navbar = () => {
                 key={item}
                 to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
                 className={`transition-colors duration-200 font-medium ${
-                  isScrolled ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80'
+                  isScrolled || !isHomePage 
+                    ? 'text-warmGray-600 hover:text-warmGray-900' 
+                    : 'text-white hover:text-white/80'
                 }`}
               >
                 {item}
@@ -48,7 +56,9 @@ const Navbar = () => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`p-2 rounded-md transition-colors duration-200 ${
-                isScrolled ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80'
+                isScrolled || !isHomePage 
+                  ? 'text-warmGray-600 hover:text-warmGray-900' 
+                  : 'text-white hover:text-white/80'
               } focus:outline-none`}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -68,7 +78,9 @@ const Navbar = () => {
                 key={item}
                 to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
                 className={`block px-3 py-2 transition-colors duration-200 font-medium ${
-                  isScrolled ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80'
+                  isScrolled || !isHomePage 
+                    ? 'text-warmGray-600 hover:text-warmGray-900' 
+                    : 'text-white hover:text-white/80'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
