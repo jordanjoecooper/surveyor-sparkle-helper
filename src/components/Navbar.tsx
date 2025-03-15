@@ -1,6 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,15 +31,15 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
             {menuItems.map((item) => (
-              <a
+              <Link
                 key={item}
-                href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
+                to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
                 className={`transition-colors duration-200 font-medium ${
                   isScrolled ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80'
                 }`}
               >
                 {item}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -64,16 +64,16 @@ const Navbar = () => {
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
             {menuItems.map((item) => (
-              <a
+              <Link
                 key={item}
-                href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
+                to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
                 className={`block px-3 py-2 transition-colors duration-200 font-medium ${
                   isScrolled ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
