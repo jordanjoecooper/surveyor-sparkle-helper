@@ -11,9 +11,9 @@ const Index = () => {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1487958449943-2429e8be8625"
+            src="/splash-1.jpg"
             alt="Modern building facade"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-[center_10%]"
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
