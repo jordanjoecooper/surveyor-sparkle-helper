@@ -15,7 +15,7 @@ const About = () => {
                 About Us
               </h1>
               <div className="prose prose-warmGray max-w-none">
-                <p className="text-lg text-warmGray-600">
+                <p className="text-lg text-warmGray-600 pb-4">
                   Glenn Blakeston Surveying is an independent Chartered Building Surveying company based near Ashford in Kent. The main Partner, Glenn Blakeston, has over 30 years experience surveying houses in Kent.
                 </p>
                 <p className="text-lg text-warmGray-600">
