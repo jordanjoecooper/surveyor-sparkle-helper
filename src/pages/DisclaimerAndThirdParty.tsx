@@ -34,10 +34,10 @@ const DisclaimerAndThirdParty = () => {
             {/* Link to Terms */}
             <div className="pt-4">
               <Link 
-                to="/terms" 
+                to="/privacy-policy" 
                 className="text-warmGray-600 hover:text-warmGray-900 underline transition-colors duration-200"
               >
-                View our Terms and Conditions
+                View our Privacy Policy
               </Link>
             </div>
           </div>
