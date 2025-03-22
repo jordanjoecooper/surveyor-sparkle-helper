@@ -11,9 +11,12 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Logo and Company Name */}
             <div className="flex items-center gap-6">
-              <span className="text-xl font-display font-bold text-white">
+              <Link 
+                to="/" 
+                className="text-xl font-display font-bold text-white hover:text-warmGray-200 transition-colors duration-200"
+              >
                 GB Surveying
-              </span>
+              </Link>
               <img 
                 src="/rics-footer.png" 
                 alt="RICS Regulated Logo" 
