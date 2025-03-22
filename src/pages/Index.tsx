@@ -10,7 +10,7 @@ const Index = () => {
   const services = [
     {
       title: "Building Surveying",
-      description: "Comprehensive building surveys and detailed property inspections for residential and commercial properties.",
+      description: "Comprehensive building surveys and detailed property inspections for residential properties.",
       icon: "🏗️"
     },
     {
@@ -53,7 +53,7 @@ const Index = () => {
             Expert Property Surveys in Kent
           </h1>
           <p className="animate-fade-up text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Comprehensive building surveys and professional advice for residential and commercial properties
+            Comprehensive building surveys and professional advice for residential properties
           </p>
           <a
             href="#contact"

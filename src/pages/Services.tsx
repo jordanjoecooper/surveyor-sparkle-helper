@@ -5,7 +5,7 @@ const Services = () => {
   const services = [
     {
       title: "Building Surveying",
-      description: "Comprehensive building surveys and detailed property inspections for residential and commercial properties.",
+      description: "Comprehensive building surveys and detailed property inspections for residential properties.",
       icon: "🏗️"
     },
     {

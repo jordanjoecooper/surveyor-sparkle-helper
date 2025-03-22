@@ -6,7 +6,7 @@ const ContactForm = () => {
   const [address, setAddress] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-// form submits shoudl go to info@gbsurveying.com
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -14,17 +14,11 @@ const ContactForm = () => {
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
     
-    // Convert FormData to URLSearchParams compatible object
-    const formDataObj: Record<string, string> = {};
-    formData.forEach((value, key) => {
-      formDataObj[key] = value.toString();
-    });
-
     try {
       const response = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formDataObj).toString()
+        body: new URLSearchParams(formData).toString()
       });
 
       if (response.ok) {
@@ -45,10 +39,10 @@ const ContactForm = () => {
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
-      className="space-y-6"
       onSubmit={handleSubmit}
+      className="space-y-6"
     >
-      {/* Hidden fields required by Netlify */}
+      {/* These hidden inputs are required for Netlify Forms with JavaScript */}
       <input type="hidden" name="form-name" value="contact" />
       <div hidden>
         <input name="bot-field" />
