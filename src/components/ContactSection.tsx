@@ -11,7 +11,7 @@ const ContactSection = () => {
     "Postcode:\n\n" +
     "Estate Agent:\n\n" +
     "Asking Price:\n\n" +
-    "Property Style:"
+    "Property Style (For example: Detached, Semi-Detached, Terraced, Flat):"
   );
 
   return (
