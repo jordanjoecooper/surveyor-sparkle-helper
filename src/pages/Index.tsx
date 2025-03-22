@@ -57,7 +57,7 @@ const Index = () => {
           </p>
           <a
             href="#contact"
-            className="animate-fade-up inline-block bg-white text-warmGray-900 px-8 py-4 rounded-md font-medium hover:bg-warmGray-100 transition-colors duration-200"
+            className="animate-fade-up inline-block bg-[#08979f] text-white px-8 py-4 rounded-md font-medium hover:bg-[#078087] transition-colors duration-200"
           >
             Get in Touch
           </a>
@@ -96,7 +96,7 @@ const Index = () => {
           <div className="text-center mt-12">
             <Link
               to="/services"
-              className="inline-flex items-center text-warmGray-900 font-medium hover:text-warmGray-700 transition-colors duration-200"
+              className="inline-flex items-center text-[#08979f] font-medium hover:text-[#078087] transition-colors duration-200"
             >
               View all services
               <svg

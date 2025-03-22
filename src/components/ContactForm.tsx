@@ -122,10 +122,10 @@ const ContactForm = () => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`w-full bg-warmGray-900 text-white px-6 py-3 rounded-md transition-colors duration-200 ${
+        className={`w-full bg-[#08979f] text-white px-6 py-3 rounded-md transition-colors duration-200 ${
           isSubmitting 
             ? 'opacity-75 cursor-not-allowed' 
-            : 'hover:bg-warmGray-800'
+            : 'hover:bg-[#078087]'
         }`}
       >
         {isSubmitting ? 'Sending...' : 'Submit'}

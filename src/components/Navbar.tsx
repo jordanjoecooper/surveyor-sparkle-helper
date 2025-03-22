@@ -29,13 +29,12 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0">
-            <Link 
-              to="/" 
-              className={`font-display text-2xl font-bold ${
-                isScrolled || !isHomePage ? 'text-warmGray-800' : 'text-white'
-              } hover:text-warmGray-700 transition-colors duration-200`}
-            >
-              GB Surveying
+            <Link to="/">
+              <img 
+                src={isScrolled || !isHomePage ? "/gb-logo-black.svg" : "/gb-logo-color.svg"} 
+                alt="GB Surveying" 
+                className="h-12 w-auto"
+              />
             </Link>
           </div>
           
