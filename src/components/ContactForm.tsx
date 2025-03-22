@@ -1,9 +1,38 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ContactForm = () => {
   const [postcode, setPostcode] = useState('');
   const [address, setAddress] = useState('');
-// form submits shoudl go tinfo@gbsurveying.com
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
+// form submits shoudl go to info@gbsurveying.com
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    const form = event.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
+      });
+
+      if (response.ok) {
+        navigate('/form-success');
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      alert('Sorry, there was a problem submitting your form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <form 
       name="contact"
@@ -11,6 +40,7 @@ const ContactForm = () => {
       data-netlify="true"
       netlify-honeypot="bot-field"
       className="space-y-6"
+      onSubmit={handleSubmit}
     >
       {/* Hidden fields required by Netlify */}
       <input type="hidden" name="form-name" value="contact" />
@@ -91,9 +121,14 @@ const ContactForm = () => {
 
       <button
         type="submit"
-        className="w-full bg-warmGray-900 text-white px-6 py-3 rounded-md hover:bg-warmGray-800 transition-colors duration-200"
+        disabled={isSubmitting}
+        className={`w-full bg-warmGray-900 text-white px-6 py-3 rounded-md transition-colors duration-200 ${
+          isSubmitting 
+            ? 'opacity-75 cursor-not-allowed' 
+            : 'hover:bg-warmGray-800'
+        }`}
       >
-        Submit
+        {isSubmitting ? 'Sending...' : 'Submit'}
       </button>
     </form>
   );
