@@ -15,16 +15,16 @@ const Services = () => {
 
             {/* Image Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              <div className="aspect-w-16 aspect-h-9 bg-warmGray-200 rounded-lg overflow-hidden">
+              <div className="aspect-w-16 aspect-h-9 bg-warmGray-200 rounded-lg overflow-hidden shadow-lg">
                 <img
-                  src="/services-1.jpg"
+                  src="/building2.jpg"
                   alt="Property Services"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="aspect-w-16 aspect-h-9 bg-warmGray-200 rounded-lg overflow-hidden">
+              <div className="aspect-w-16 aspect-h-9 bg-warmGray-200 rounded-lg overflow-hidden shadow-lg">
                 <img
-                  src="/services-2.jpg"
+                  src="/building3.jpg"
                   alt="Property Services"
                   className="w-full h-full object-cover"
                 />

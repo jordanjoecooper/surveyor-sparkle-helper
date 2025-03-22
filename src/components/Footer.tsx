@@ -31,10 +31,10 @@ const Footer = () => {
                   Disclaimer & Third Party Sites
                 </a>
                 <a 
-                  href="/terms" 
+                  href="/privacy-policy" 
                   className="hover:text-white transition-colors duration-200"
                 >
-                  Terms & Conditions
+                  Privacy Policy
                 </a>
               </div>
             </div>
