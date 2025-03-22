@@ -9,9 +9,31 @@ const SurveyDefinitions = () => {
       <main className="flex-grow">
         <div className="pt-20 pb-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-warmGray-900 mb-8 mt-8">
-              DEFINITIONS OF SURVEY LEVELS
-            </h1>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 mt-8">
+              <h1 className="text-3xl md:text-4xl font-bold text-warmGray-900">
+                DEFINITIONS OF SURVEY LEVELS
+              </h1>
+              <a 
+                href="/survey_level_definitions.docx"
+                download
+                className="inline-flex items-center px-4 py-2 text-sm font-medium text-warmGray-700 bg-white border border-warmGray-300 rounded-md hover:bg-warmGray-50 transition-colors duration-200"
+              >
+                <svg 
+                  className="w-4 h-4 mr-2" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                  />
+                </svg>
+                Download Definitions
+              </a>
+            </div>
             
             {/* Survey Level 1 */}
             <div className="mb-12 bg-white rounded-lg p-8 shadow-sm">
