@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useState } from 'react';
 import ContactForm from '../components/ContactForm';
+import ContactSection from '../components/ContactSection';
 
 const Index = () => {
   return (
@@ -91,40 +92,7 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contact" className="py-24 bg-warmGray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-warmGray-900 mb-6">
-                Get in Touch
-              </h2>
-              <p className="text-warmGray-600 mb-8">
-                Contact us today to discuss your surveying needs or schedule an appointment.
-              </p>
-              
-              <div className="space-y-4">
-                {[
-                  {
-                    icon: <Phone className="w-5 h-5" />,
-                    text: "+44 (0) 1234 567890",
-                  },
-                  {
-                    icon: <Mail className="w-5 h-5" />,
-                    text: "info@gbsurveying.com",
-                  },
-                  {
-                    icon: <MapPin className="w-5 h-5" />,
-                    text: "Ashford, Kent",
-                  },
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center space-x-3 text-warmGray-600">
-                    {item.icon}
-                    <span>{item.text}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <ContactForm />
-          </div>
+          <ContactSection />
         </div>
       </section>
 
