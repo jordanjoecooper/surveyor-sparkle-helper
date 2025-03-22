@@ -8,37 +8,39 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col space-y-8">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 gap-8">
             {/* Logo and Company Name */}
-            <div className="flex items-center gap-6">
-              <Link 
-                to="/" 
-                className="text-xl font-display font-bold text-white hover:text-warmGray-200 transition-colors duration-200"
-              >
-                GB Surveying
-              </Link>
-              <img 
-                src="/rics-footer.png" 
-                alt="RICS Regulated Logo" 
-                className="h-8 w-auto object-contain"
-              />
-            </div>
+            <div className="flex flex-col items-center gap-6">
+              <div className="flex items-center gap-6">
+                <Link 
+                  to="/" 
+                  className="text-xl font-display font-bold text-white hover:text-warmGray-200 transition-colors duration-200"
+                >
+                  GB Surveying
+                </Link>
+                <img 
+                  src="/rics-footer.png" 
+                  alt="RICS Regulated Logo" 
+                  className="h-8 w-auto object-contain"
+                />
+              </div>
 
-            {/* Legal Links */}
-            <div className="flex justify-end">
-              <div className="flex flex-wrap gap-4 text-sm text-warmGray-400">
-                <a 
-                  href="/disclaimer-and-third-party" 
-                  className="hover:text-white transition-colors duration-200"
-                >
-                  Disclaimer & Third Party Sites
-                </a>
-                <a 
-                  href="/privacy-policy" 
-                  className="hover:text-white transition-colors duration-200"
-                >
-                  Privacy Policy
-                </a>
+              {/* Legal Links */}
+              <div className="flex justify-center">
+                <div className="flex flex-wrap gap-4 text-sm text-warmGray-400">
+                  <a 
+                    href="/disclaimer-and-third-party" 
+                    className="hover:text-white transition-colors duration-200"
+                  >
+                    Disclaimer & Third Party Sites
+                  </a>
+                  <a 
+                    href="/privacy-policy" 
+                    className="hover:text-white transition-colors duration-200"
+                  >
+                    Privacy Policy
+                  </a>
+                </div>
               </div>
             </div>
           </div>
