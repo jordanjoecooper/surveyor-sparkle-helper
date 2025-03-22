@@ -15,18 +15,23 @@ const ContactForm = () => {
     const formData = new FormData(form);
     
     try {
+      // Convert FormData to a plain object
+      const formDataObj = Object.fromEntries(formData);
+      
       const response = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString()
+        body: new URLSearchParams(formDataObj).toString()
       });
 
       if (response.ok) {
         navigate('/form-success');
       } else {
+        console.error('Form submission failed:', response.status);
         throw new Error('Form submission failed');
       }
     } catch (error) {
+      console.error('Form submission error:', error);
       alert('Sorry, there was a problem submitting your form. Please try again.');
     } finally {
       setIsSubmitting(false);
