@@ -4,6 +4,9 @@
 
 **URL**: https://lovable.dev/projects/8fa57c9e-28bd-4a17-b551-c8f413480e40
 
+ALso deployed here
+https://gbsurveyingdemo.netlify.app/
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
