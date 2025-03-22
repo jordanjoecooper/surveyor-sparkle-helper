@@ -4,8 +4,32 @@ import Footer from '../components/Footer';
 import { useState } from 'react';
 import ContactForm from '../components/ContactForm';
 import ContactSection from '../components/ContactSection';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
+  const services = [
+    {
+      title: "Building Surveying",
+      description: "Comprehensive building surveys and detailed property inspections for residential and commercial properties.",
+      icon: "🏗️"
+    },
+    {
+      title: "General Property Advice",
+      description: "Expert guidance on property matters, maintenance, and improvements to help you make informed decisions.",
+      icon: "📋"
+    },
+    {
+      title: "Improvement Advice",
+      description: "Professional recommendations for property improvements and renovations to enhance value and functionality.",
+      icon: "🔨"
+    },
+    {
+      title: "Defects Analysis",
+      description: "Thorough investigation and analysis of building defects with detailed reports and remediation recommendations.",
+      icon: "🔍"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-warmGray-50">
       <Navbar />
@@ -41,43 +65,25 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 bg-white">
+      <section className="py-24 bg-warmGray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-warmGray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-warmGray-900 mb-4">
               Our Services
             </h2>
-            <p className="text-warmGray-600 max-w-2xl mx-auto">
-              Comprehensive building surveying services tailored to your needs
+            <p className="text-lg text-warmGray-600 max-w-2xl mx-auto">
+              Professional surveying services tailored to your needs, delivered with expertise and attention to detail.
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Building Surveys",
-                description: "Detailed analysis of property condition and structure",
-                icon: <Building className="w-6 h-6" />,
-              },
-              {
-                title: "Property Valuations",
-                description: "Accurate market value assessments for all property types",
-                icon: <MapPin className="w-6 h-6" />,
-              },
-              {
-                title: "Project Management",
-                description: "End-to-end oversight of building projects",
-                icon: <Clock className="w-6 h-6" />,
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="group p-8 bg-warmGray-50 rounded-lg hover:bg-warmGray-100 transition-colors duration-200"
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service, index) => (
+              <div 
+                key={service.title}
+                className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200 text-center"
               >
-                <div className="text-warmGray-700 mb-4 group-hover:text-warmGray-900">
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-display font-bold text-warmGray-900 mb-2">
+                <div className="text-4xl mb-4 flex justify-center">{service.icon}</div>
+                <h3 className="text-xl font-bold text-warmGray-900 mb-2">
                   {service.title}
                 </h3>
                 <p className="text-warmGray-600">
@@ -85,6 +91,28 @@ const Index = () => {
                 </p>
               </div>
             ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              to="/services"
+              className="inline-flex items-center text-warmGray-900 font-medium hover:text-warmGray-700 transition-colors duration-200"
+            >
+              View all services
+              <svg
+                className="w-5 h-5 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>

@@ -13,12 +13,18 @@ const ContactForm = () => {
 
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
+    
+    // Convert FormData to URLSearchParams compatible object
+    const formDataObj: Record<string, string> = {};
+    formData.forEach((value, key) => {
+      formDataObj[key] = value.toString();
+    });
 
     try {
       const response = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString()
+        body: new URLSearchParams(formDataObj).toString()
       });
 
       if (response.ok) {
