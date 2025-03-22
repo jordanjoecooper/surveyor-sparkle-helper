@@ -2,6 +2,18 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 import ContactForm from './ContactForm';
 
 const ContactSection = () => {
+  // Create a properly encoded mailto URL
+  const mailtoUrl = encodeURI(
+    "mailto:info@gbsurveying.com" + 
+    "?subject=Survey Quote Request" + 
+    "&body=I would like to request a survey quote.\n\n" +
+    "Property Address:\n\n" +
+    "Postcode:\n\n" +
+    "Estate Agent:\n\n" +
+    "Asking Price:\n\n" +
+    "Property Style:"
+  );
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
       <div>
@@ -14,25 +26,31 @@ const ContactSection = () => {
           </p>
           
           <div className="space-y-4">
-            {[
-              {
-                icon: <Phone className="w-5 h-5" />,
-                text: "+44 (0) 1234 567890",
-              },
-              {
-                icon: <Mail className="w-5 h-5" />,
-                text: "info@gbsurveying.com",
-              },
-              {
-                icon: <MapPin className="w-5 h-5" />,
-                text: "Ashford, Kent",
-              },
-            ].map((item, index) => (
-              <div key={index} className="flex items-center space-x-3 text-warmGray-600">
-                {item.icon}
-                <span>{item.text}</span>
-              </div>
-            ))}
+            <a 
+              href="tel:+441233367361" 
+              className="flex items-center space-x-3 text-warmGray-600 hover:text-warmGray-900 transition-colors duration-200"
+            >
+              <Phone className="w-5 h-5" />
+              <span>Office: 01233 367361</span>
+            </a>
+            
+            <a 
+              href={mailtoUrl}
+              className="flex items-center space-x-3 text-warmGray-600 hover:text-warmGray-900 transition-colors duration-200"
+            >
+              <Mail className="w-5 h-5" />
+              <span>info@gbsurveying.com</span>
+            </a>
+            
+            <a 
+              href="https://maps.google.com/?q=Hurstfield,Canterbury+Road,Challock,Ashford,Kent,TN25+4DW" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center space-x-3 text-warmGray-600 hover:text-warmGray-900 transition-colors duration-200"
+            >
+              <MapPin className="w-5 h-5" />
+              <span>Ashford, Kent</span>
+            </a>
           </div>
         </div>
       </div>

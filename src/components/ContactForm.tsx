@@ -16,7 +16,7 @@ const ContactForm = () => {
           className="w-full px-4 py-3 rounded-md border border-warmGray-300 focus:ring-2 focus:ring-warmGray-400 focus:border-transparent transition-colors duration-200"
         />
       </div>
-      
+
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-warmGray-700 mb-1">
           Email
@@ -29,10 +29,6 @@ const ContactForm = () => {
       </div>
 
       <div className="space-y-4">
-        <p className="text-sm text-warmGray-600">
-          Please provide the address and postcode of the property you would like surveyed:
-        </p>
-        
         <div>
           <label htmlFor="address" className="block text-sm font-medium text-warmGray-700 mb-1">
             Address (optional)
