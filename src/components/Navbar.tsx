@@ -1,6 +1,42 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+
+// Memoize the mobile menu button component
+const MobileMenuButton = memo(({ 
+  isMobileMenuOpen, 
+  setIsMobileMenuOpen, 
+  isHomePage, 
+  isScrolled 
+}: {
+  isMobileMenuOpen: boolean;
+  setIsMobileMenuOpen: (open: boolean) => void;
+  isHomePage: boolean;
+  isScrolled: boolean;
+}) => (
+  <button
+    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+    className={`md:hidden p-2 rounded-md transition-all duration-200 z-[70] ${
+      isMobileMenuOpen 
+        ? 'text-warmGray-800 hover:text-warmGray-900' 
+        : isHomePage && !isScrolled 
+          ? 'text-white hover:text-white/80' 
+          : 'text-warmGray-600 hover:text-warmGray-900'
+    } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500`}
+    aria-expanded={isMobileMenuOpen}
+    aria-controls="mobile-menu"
+    aria-label={isMobileMenuOpen ? "Close main menu" : "Open main menu"}
+  >
+    <span className="sr-only">{isMobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
+    {isMobileMenuOpen ? (
+      <X className="h-6 w-6" aria-hidden="true" />
+    ) : (
+      <Menu className="h-6 w-6" aria-hidden="true" />
+    )}
+  </button>
+));
+
+MobileMenuButton.displayName = 'MobileMenuButton';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -10,13 +46,18 @@ const Navbar = () => {
   // Check if we're on the home page
   const isHomePage = location.pathname === '/';
 
+  // Memoize the scroll handler
+  const handleScroll = useCallback(() => {
+    const shouldBeScrolled = window.scrollY > 20;
+    if (isScrolled !== shouldBeScrolled) {
+      setIsScrolled(shouldBeScrolled);
+    }
+  }, [isScrolled]);
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   // Prevent scrolling when mobile menu is open
   useEffect(() => {
@@ -32,11 +73,11 @@ const Navbar = () => {
 
   const menuItems = ['Surveys', 'Contact', 'About', 'Services'];
 
-  // Helper function to check if menu item is current page
-  const isCurrentPage = (item: string) => {
+  // Memoize the isCurrentPage function
+  const isCurrentPage = useCallback((item: string) => {
     const itemPath = item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`;
     return location.pathname === itemPath;
-  };
+  }, [location.pathname]);
 
   return (
     <>
@@ -95,26 +136,12 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`md:hidden p-2 rounded-md transition-all duration-200 z-[70] ${
-                isMobileMenuOpen 
-                  ? 'text-warmGray-800 hover:text-warmGray-900' 
-                  : isHomePage && !isScrolled 
-                    ? 'text-white hover:text-white/80' 
-                    : 'text-warmGray-600 hover:text-warmGray-900'
-              } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500`}
-              aria-expanded={isMobileMenuOpen}
-              aria-controls="mobile-menu"
-              aria-label={isMobileMenuOpen ? "Close main menu" : "Open main menu"}
-            >
-              <span className="sr-only">{isMobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
+            <MobileMenuButton 
+              isMobileMenuOpen={isMobileMenuOpen}
+              setIsMobileMenuOpen={setIsMobileMenuOpen}
+              isHomePage={isHomePage}
+              isScrolled={isScrolled}
+            />
           </div>
         </div>
       </nav>
