@@ -5,11 +5,13 @@ const ContactForm = () => {
   const [postcode, setPostcode] = useState('');
   const [address, setAddress] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
+    setError(null);
 
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
@@ -17,27 +19,26 @@ const ContactForm = () => {
     try {
       const response = await fetch("/", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          "form-name": "contact",
-          ...Object.fromEntries(formData)
-        }).toString()
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString()
       });
 
       if (response.ok) {
         navigate('/form-success');
       } else {
         console.error('Form submission failed:', response.status);
-        // Fallback to email if Netlify form fails
-        window.location.href = `mailto:info@gbsurveying.com?subject=Contact Form Submission&body=${encodeURIComponent(
-          `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\nAddress: ${formData.get('address')}\nPostcode: ${formData.get('postcode')}\nMessage: ${formData.get('message')}`
-        )}`;
+        setError('Form submission failed. Please try again or contact us directly.');
+        // Only use email fallback if the error is a network error
+        if (!response.ok && response.status === 0) {
+          window.location.href = `mailto:info@gbsurveying.com?subject=Contact Form Submission&body=${encodeURIComponent(
+            `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\nAddress: ${formData.get('address')}\nPostcode: ${formData.get('postcode')}\nMessage: ${formData.get('message')}`
+          )}`;
+        }
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      // Fallback to email
+      setError('Unable to submit form. Please try again or contact us directly.');
+      // Use email fallback for network errors
       window.location.href = `mailto:info@gbsurveying.com?subject=Contact Form Submission&body=${encodeURIComponent(
         `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\nAddress: ${formData.get('address')}\nPostcode: ${formData.get('postcode')}\nMessage: ${formData.get('message')}`
       )}`;
@@ -51,7 +52,7 @@ const ContactForm = () => {
       name="contact"
       method="POST"
       data-netlify="true"
-      netlify-honeypot="bot-field"
+      data-netlify-honeypot="bot-field"
       onSubmit={handleSubmit}
       className="space-y-6"
     >
@@ -61,6 +62,12 @@ const ContactForm = () => {
       <div hidden>
         <input name="bot-field" />
       </div>
+
+      {error && (
+        <div className="p-4 text-red-600 bg-red-50 rounded-md">
+          {error}
+        </div>
+      )}
 
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-warmGray-700 mb-1">
