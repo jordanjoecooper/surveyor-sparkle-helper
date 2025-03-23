@@ -1,12 +1,20 @@
 import { Building, MapPin, Phone, Mail, Clock } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ContactForm from '../components/ContactForm';
 import ContactSection from '../components/ContactSection';
 import { Link } from 'react-router-dom';
 
 const Index = () => {
+  const [bgLoaded, setBgLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = '/splash-1.jpg';
+    img.onload = () => setBgLoaded(true);
+  }, []);
+
   const services = [
     {
       title: "Building Surveying",
@@ -37,10 +45,20 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
-            src="/splash-1.jpg"
-            alt="Modern building facade"
-            className="w-full h-full object-cover object-[center_10%]"
+          <div 
+            className={`absolute inset-0 bg-warmGray-900 transition-opacity duration-1000 ${
+              bgLoaded ? 'opacity-0' : 'opacity-100'
+            }`}
+          />
+          <div 
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              bgLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              backgroundImage: `url('/splash-1.jpg')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center 10%'
+            }}
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
