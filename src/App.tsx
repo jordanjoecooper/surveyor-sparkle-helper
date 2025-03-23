@@ -1,30 +1,37 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import SurveyDefinitions from "./pages/SurveyDefinitions";
-import Disclaimer from "./pages/Disclaimer";
-import ThirdPartySites from "./pages/ThirdPartySites";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import NotFound from "./pages/NotFound";
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Services from './pages/Services';
-import DisclaimerAndThirdParty from './pages/DisclaimerAndThirdParty';
-import Terms from './pages/Terms';
-import FormSuccess from './pages/FormSuccess';
-import Surveys from './pages/Surveys';
+import { Suspense, lazy } from "react";
 
-const queryClient = new QueryClient();
+// Lazy load all pages
+const Index = lazy(() => import("./pages/Index"));
+const SurveyDefinitions = lazy(() => import("./pages/SurveyDefinitions"));
+const Disclaimer = lazy(() => import("./pages/Disclaimer"));
+const ThirdPartySites = lazy(() => import("./pages/ThirdPartySites"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Services = lazy(() => import('./pages/Services'));
+const DisclaimerAndThirdParty = lazy(() => import('./pages/DisclaimerAndThirdParty'));
+const Terms = lazy(() => import('./pages/Terms'));
+const FormSuccess = lazy(() => import('./pages/FormSuccess'));
+const Surveys = lazy(() => import('./pages/Surveys'));
+
+// Loading component
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#08979f]"></div>
+  </div>
+);
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <Router>
+  <TooltipProvider>
+    <Toaster />
+    <Sonner />
+    <Router>
+      <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/survey-definitions" element={<SurveyDefinitions />} />
@@ -40,9 +47,9 @@ const App = () => (
           <Route path="/surveys" element={<Surveys />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Router>
-    </TooltipProvider>
-  </QueryClientProvider>
+      </Suspense>
+    </Router>
+  </TooltipProvider>
 );
 
 export default App;
