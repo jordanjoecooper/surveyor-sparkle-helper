@@ -1,6 +1,3 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
@@ -27,9 +24,7 @@ const LoadingFallback = () => (
 );
 
 const App = () => (
-  <TooltipProvider>
-    <Toaster />
-    <Sonner />
+
     <Router>
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
@@ -49,7 +44,6 @@ const App = () => (
         </Routes>
       </Suspense>
     </Router>
-  </TooltipProvider>
 );
 
 export default App;
