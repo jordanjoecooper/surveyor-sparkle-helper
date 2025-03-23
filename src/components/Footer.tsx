@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
-  const menuItems = ['Home', 'Services', 'Survey Definitions', 'About', 'Contact'];
+  const menuItems = ['Home', 'Surveys', 'About', 'Contact', 'Services'];
 
   return (
     <footer className="bg-[#08979f] text-white py-12">
