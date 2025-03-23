@@ -39,3 +39,7 @@ npm run dev
 Can you add a backup to the contact form so that if submission fails it will try to open the persons email client with the info instead - need to handle what happens if form breaks!
 
 
+If successful, they'll be redirected to the success page
+If there's an error, they'll see an error message
+
+Add custom pages for these two.
