@@ -47,6 +47,9 @@
   <body>
     <!-- Hidden Netlify Form -->
     <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="subject" value="New Contact Form Submission" />
+      <input name="bot-field" />
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="text" name="address" />

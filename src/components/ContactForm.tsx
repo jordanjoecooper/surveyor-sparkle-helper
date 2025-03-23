@@ -8,6 +8,12 @@ const ContactForm = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const encode = (data: { [key: string]: string }) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -15,12 +21,16 @@ const ContactForm = () => {
 
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
     
     try {
       const response = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData as any).toString()
+        body: encode({
+          "form-name": "contact",
+          ...data as { [key: string]: string }
+        })
       });
 
       if (response.ok) {
