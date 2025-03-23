@@ -23,7 +23,9 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled || isMobileMenuOpen ? 'bg-white/90 backdrop-blur-md shadow-sm' : isHomePage ? 'bg-transparent' : 'bg-white shadow-sm'
+        isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 
+        isMobileMenuOpen ? 'bg-transparent' : 
+        isHomePage ? 'bg-transparent' : 'bg-white shadow-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,13 +33,13 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center gap-3">
               <img 
-                src={isScrolled || !isHomePage ? "/gb-logo-black.svg" : "/gb-logo-color.svg"} 
+                src={isMobileMenuOpen ? "/gb-logo-color.svg" : (isScrolled || !isHomePage ? "/gb-logo-black.svg" : "/gb-logo-color.svg")} 
                 alt="GB Surveying" 
                 className="h-12 w-auto"
               />
               <span 
                 className={`font-display text-xl font-bold transition-colors duration-200 ${
-                  isScrolled || !isHomePage ? 'text-warmGray-800' : 'text-white'
+                  isMobileMenuOpen ? 'text-white' : (isScrolled || !isHomePage ? 'text-warmGray-800' : 'text-white')
                 }`}
               >
                 GB Surveying
@@ -52,9 +54,8 @@ const Navbar = () => {
                 key={item}
                 to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
                 className={`transition-colors duration-200 font-medium ${
-                  isScrolled || !isHomePage 
-                    ? 'text-warmGray-600 hover:text-warmGray-900' 
-                    : 'text-white hover:text-white/80'
+                  isMobileMenuOpen ? 'text-white hover:text-white/80' :
+                  (isScrolled || !isHomePage ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80')
                 }`}
               >
                 {item}
@@ -67,9 +68,8 @@ const Navbar = () => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`p-2 rounded-md transition-colors duration-200 ${
-                isScrolled || !isHomePage 
-                  ? 'text-warmGray-600 hover:text-warmGray-900' 
-                  : 'text-white hover:text-white/80'
+                isMobileMenuOpen ? 'text-white hover:text-white/80' :
+                (isScrolled || !isHomePage ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80')
               } focus:outline-none`}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -80,7 +80,9 @@ const Navbar = () => {
         {/* Mobile Menu */}
         <div
           className={`md:hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? 'max-h-64 opacity-100 bg-white/90 backdrop-blur-md' : 'max-h-0 opacity-0'
+            isMobileMenuOpen 
+              ? 'max-h-64 opacity-100 bg-black/40 backdrop-blur-sm' 
+              : 'max-h-0 opacity-0'
           } overflow-hidden`}
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
@@ -88,7 +90,7 @@ const Navbar = () => {
               <Link
                 key={item}
                 to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
-                className="block px-3 py-2 transition-colors duration-200 font-medium text-warmGray-600 hover:text-warmGray-900"
+                className="block px-3 py-2 transition-colors duration-200 font-medium text-white hover:text-white/90"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item}
