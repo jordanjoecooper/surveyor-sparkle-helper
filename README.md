@@ -32,3 +32,8 @@ npm i
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
+
+
+
+# TODO
+- Check form works fully , debounce and sevure it. and add back up to send to email if submission errors.
