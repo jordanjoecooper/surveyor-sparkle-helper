@@ -18,88 +18,158 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
   const menuItems = ['Home', 'Services', 'Survey Definitions', 'About', 'Contact'];
 
-  return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 
-        isMobileMenuOpen ? 'bg-transparent' : 
-        isHomePage ? 'bg-transparent' : 'bg-white shadow-sm'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center gap-3">
-              <img 
-                src={isMobileMenuOpen ? "/gb-logo-color.svg" : (isScrolled || !isHomePage ? "/gb-logo-black.svg" : "/gb-logo-color.svg")} 
-                alt="GB Surveying" 
-                className="h-12 w-auto"
-              />
-              <span 
-                className={`font-display text-xl font-bold transition-colors duration-200 ${
-                  isMobileMenuOpen ? 'text-white' : (isScrolled || !isHomePage ? 'text-warmGray-800' : 'text-white')
-                }`}
-              >
-                GB Surveying
-              </span>
-            </Link>
-          </div>
-          
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
-            {menuItems.map((item) => (
-              <Link
-                key={item}
-                to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
-                className={`transition-colors duration-200 font-medium ${
-                  isMobileMenuOpen ? 'text-white hover:text-white/80' :
-                  (isScrolled || !isHomePage ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80')
-                }`}
-              >
-                {item}
-              </Link>
-            ))}
-          </div>
+  // Helper function to check if menu item is current page
+  const isCurrentPage = (item: string) => {
+    const itemPath = item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`;
+    return location.pathname === itemPath;
+  };
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+  return (
+    <>
+      <nav
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 
+          isMobileMenuOpen ? 'bg-transparent' : 
+          isHomePage ? 'bg-transparent' : 'bg-white shadow-sm'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            <div className="flex-shrink-0">
+              <Link to="/" className="flex items-center gap-3">
+                <img 
+                  src="/gb-logo-color.svg"
+                  alt="GB Surveying" 
+                  className="h-12 w-auto"
+                />
+                <span 
+                  className={`font-display text-xl font-bold transition-colors duration-200 ${
+                    isHomePage && !isScrolled ? 'text-white' : 'text-warmGray-800'
+                  }`}
+                >
+                  GB Surveying
+                </span>
+              </Link>
+            </div>
+            
+            {/* Desktop Menu */}
+            <div className="hidden md:flex space-x-8">
+              {menuItems.map((item) => (
+                <Link
+                  key={item}
+                  to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
+                  className={`transition-colors duration-200 font-medium ${
+                    isHomePage && !isScrolled ? 'text-white hover:text-white/80' : 'text-warmGray-600 hover:text-warmGray-900'
+                  }`}
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`p-2 rounded-md transition-colors duration-200 ${
-                isMobileMenuOpen ? 'text-white hover:text-white/80' :
-                (isScrolled || !isHomePage ? 'text-warmGray-600 hover:text-warmGray-900' : 'text-white hover:text-white/80')
-              } focus:outline-none`}
+              className={`md:hidden p-2 rounded-md transition-all duration-200 z-[70] ${
+                isMobileMenuOpen 
+                  ? 'text-warmGray-800 hover:text-warmGray-900' 
+                  : isHomePage && !isScrolled 
+                    ? 'text-white hover:text-white/80' 
+                    : 'text-warmGray-600 hover:text-warmGray-900'
+              } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500`}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label="Main menu"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              <span className="sr-only">Open main menu</span>
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="h-6 w-6" aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
+      </nav>
 
-        {/* Mobile Menu */}
-        <div
-          className={`md:hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen 
-              ? 'max-h-64 opacity-100 bg-black/40 backdrop-blur-sm' 
-              : 'max-h-0 opacity-0'
-          } overflow-hidden`}
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {menuItems.map((item) => (
-              <Link
-                key={item}
-                to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
-                className="block px-3 py-2 transition-colors duration-200 font-medium text-white hover:text-white/90"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item}
-              </Link>
-            ))}
-          </div>
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden z-[60] ${
+          isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        aria-hidden="true"
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
+
+      {/* Mobile Menu Panel */}
+      <div
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        className={`fixed inset-y-0 right-0 w-[min(75vw,320px)] bg-white shadow-2xl transition-transform duration-300 ease-in-out transform md:hidden z-[70] ${
+          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        {/* Mobile Menu Header */}
+        <div className="h-20 px-6 flex items-center justify-between border-b border-warmGray-100">
+          <Link to="/" className="flex items-center gap-3" onClick={() => setIsMobileMenuOpen(false)}>
+            <img 
+              src="/gb-logo-color.svg"
+              alt="GB Surveying" 
+              className="h-10 w-auto"
+            />
+            <span className="font-display text-lg font-bold text-warmGray-800">
+              GB Surveying
+            </span>
+          </Link>
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="p-2 rounded-md text-warmGray-600 hover:text-warmGray-900 transition-colors duration-200"
+            aria-label="Close menu"
+          >
+            <X className="h-6 w-6" aria-hidden="true" />
+          </button>
         </div>
+
+        {/* Mobile Menu Content */}
+        <nav className="h-[calc(100%-5rem)] overflow-y-auto" aria-label="Main navigation">
+          <div className="px-1 pt-2 pb-3 space-y-1">
+            {menuItems.map((item) => {
+              const isActive = isCurrentPage(item);
+              return (
+                <Link
+                  key={item}
+                  to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
+                  className={`block px-6 py-4 text-base font-medium rounded-lg transition-all duration-200 ${
+                    isActive 
+                      ? 'text-cyan-700 bg-cyan-50/80' 
+                      : 'text-warmGray-600 hover:text-warmGray-900 hover:bg-warmGray-50'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {item}
+                </Link>
+              )}
+            )}
+          </div>
+        </nav>
       </div>
-    </nav>
+    </>
   );
 };
 
