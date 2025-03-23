@@ -29,7 +29,7 @@ const Services = () => {
     <div className="min-h-screen bg-warmGray-50">
       <Navbar />
       <main className="flex-grow">
-        
+
         <div className="pt-20 pb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -40,8 +40,9 @@ const Services = () => {
                 Professional surveying services tailored to your needs, delivered with expertise and attention to detail.
               </p>
             </div>
-                        {/* Image Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-3xl mx-auto">
+            {/* Image Grid */}
+            {/* Disable this for now until we find better images */}
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-3xl mx-auto">
               <div className="aspect-w-16 aspect-h-9 bg-warmGray-200 rounded-lg overflow-hidden shadow-lg">
                 <img
                   src="/building2.jpg"
@@ -56,12 +57,12 @@ const Services = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-            </div>
+            </div> */}
 
             {/* Services Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               {services.map((service) => (
-                <div 
+                <div
                   key={service.title}
                   className="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-200 text-center"
                 >
