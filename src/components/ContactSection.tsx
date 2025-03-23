@@ -22,8 +22,7 @@ const ContactSection = () => {
         </h2>
         <div className="space-y-6">
           <p className="text-warmGray-600">
-            Please contact us using the following details. If you would like a no obligation survey quote then please contact us by calling, by email or by completing the contact form, including the address of the property that you are buying, with the postcode, the name of the selling agents, the asking price and the style of property in the Comments box.
-          </p>
+          Contact us using the details below. For a free, no-obligation survey quote, get in touch by phone, email, or by filling out the contact form. Please include the property address, postcode, selling agent’s name, asking price, property type and any other relevant information.</p>
           
           <div className="space-y-4">
             <a 

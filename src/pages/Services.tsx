@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
 
 const Services = () => {
   const services = [
@@ -81,6 +82,21 @@ const Services = () => {
               <p className="text-warmGray-600">
                 Please note, we may make a referral payment, either individually or as part of a third-party commercial relationship.
               </p>
+            </div>
+            {/* Add this section where appropriate in your services content */}
+            <div className="mt-8 p-6 bg-cyan-50 rounded-lg">
+              <h3 className="text-xl font-semibold text-cyan-900 mb-3">
+                Looking for Survey Information?
+              </h3>
+              <p className="text-cyan-800 mb-4">
+                Learn more about our comprehensive survey services and the different types of surveys available.
+              </p>
+              <Link
+                to="/surveys"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#08979f] hover:bg-[#078087] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#08979f] transition-colors duration-200"
+              >
+                View Our Surveys
+              </Link>
             </div>
           </div>
         </div>

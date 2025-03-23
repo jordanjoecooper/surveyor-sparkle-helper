@@ -15,6 +15,7 @@ import Services from './pages/Services';
 import DisclaimerAndThirdParty from './pages/DisclaimerAndThirdParty';
 import Terms from './pages/Terms';
 import FormSuccess from './pages/FormSuccess';
+import Surveys from './pages/Surveys';
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/disclaimer-and-third-party" element={<DisclaimerAndThirdParty />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/form-success" element={<FormSuccess />} />
+          <Route path="/surveys" element={<Surveys />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

@@ -30,7 +30,7 @@ const Navbar = () => {
     };
   }, [isMobileMenuOpen]);
 
-  const menuItems = ['Home', 'Services', 'Survey Definitions', 'About', 'Contact'];
+  const menuItems = ['Surveys', 'Contact', 'About', 'Services'];
 
   // Helper function to check if menu item is current page
   const isCurrentPage = (item: string) => {
