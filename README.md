@@ -33,7 +33,9 @@ npm i
 npm run dev
 ```
 
-
-
 # TODO
 - Check form works fully , debounce and sevure it. and add back up to send to email if submission errors.
+
+Can you add a backup to the contact form so that if submission fails it will try to open the persons email client with the info instead - need to handle what happens if form breaks!
+
+
