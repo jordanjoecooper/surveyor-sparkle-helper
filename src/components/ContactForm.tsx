@@ -15,24 +15,32 @@ const ContactForm = () => {
     const formData = new FormData(form);
     
     try {
-      // Convert FormData to a plain object
-      const formDataObj = Object.fromEntries(formData);
-      
       const response = await fetch("/", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formDataObj).toString()
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          ...Object.fromEntries(formData)
+        }).toString()
       });
 
       if (response.ok) {
         navigate('/form-success');
       } else {
         console.error('Form submission failed:', response.status);
-        throw new Error('Form submission failed');
+        // Fallback to email if Netlify form fails
+        window.location.href = `mailto:info@gbsurveying.com?subject=Contact Form Submission&body=${encodeURIComponent(
+          `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\nAddress: ${formData.get('address')}\nPostcode: ${formData.get('postcode')}\nMessage: ${formData.get('message')}`
+        )}`;
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      alert('Sorry, there was a problem submitting your form. Please try again.');
+      // Fallback to email
+      window.location.href = `mailto:info@gbsurveying.com?subject=Contact Form Submission&body=${encodeURIComponent(
+        `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\nAddress: ${formData.get('address')}\nPostcode: ${formData.get('postcode')}\nMessage: ${formData.get('message')}`
+      )}`;
     } finally {
       setIsSubmitting(false);
     }
@@ -47,8 +55,9 @@ const ContactForm = () => {
       onSubmit={handleSubmit}
       className="space-y-6"
     >
-      {/* These hidden inputs are required for Netlify Forms with JavaScript */}
+      {/* These hidden inputs are required for Netlify Forms */}
       <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="subject" value="New Contact Form Submission" />
       <div hidden>
         <input name="bot-field" />
       </div>
