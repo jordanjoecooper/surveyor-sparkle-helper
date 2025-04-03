@@ -1,20 +1,22 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
-// Lazy load all pages
-const Index = lazy(() => import("./pages/Index"));
+// Direct imports
+import Index from "./pages/Index";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Services from "./pages/Services";
+import Terms from "./pages/Terms";
+import FormSuccess from "./pages/FormSuccess";
+import Surveys from "./pages/Surveys";
+
+// Lazy load remaining pages
 const SurveyDefinitions = lazy(() => import("./pages/SurveyDefinitions"));
 const Disclaimer = lazy(() => import("./pages/Disclaimer"));
 const ThirdPartySites = lazy(() => import("./pages/ThirdPartySites"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const About = lazy(() => import('./pages/About'));
-const Contact = lazy(() => import('./pages/Contact'));
-const Services = lazy(() => import('./pages/Services'));
 const DisclaimerAndThirdParty = lazy(() => import('./pages/DisclaimerAndThirdParty'));
-const Terms = lazy(() => import('./pages/Terms'));
-const FormSuccess = lazy(() => import('./pages/FormSuccess'));
-const Surveys = lazy(() => import('./pages/Surveys'));
 
 // Loading component
 const LoadingFallback = () => (
